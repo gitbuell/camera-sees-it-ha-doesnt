@@ -65,6 +65,12 @@ a parser bug but isn't. Feed **those two files** to the diagnostician, then chec
 > ⚠️ Feed the model `scenario.md` + `bridge-log.txt` **only**. `ANSWER-KEY.md` is for you — don't load it
 > into the diagnostician's context, and don't add `test-case/` to the Claude project's knowledge.
 
+`test-case/negative/` adds three **negative** fixtures — a case that *demands a fix*, an out-of-scope
+"too many events" case, and a case with almost no evidence — each testing that the diagnostician
+*refuses* the wrong move (prescribing, force-fitting, guessing) rather than getting an answer right.
+And [`receipts/`](receipts/) holds **verbatim transcripts** of the diagnostician actually run against all
+four fixtures, so you can see it hold the line before you trust it.
+
 ## What it will NOT do
 
 - It won't fix the problem, edit your config, or write code.
@@ -83,7 +89,8 @@ a parser bug but isn't. Feed **those two files** to the diagnostician, then chec
 | [`reference/failure-modes.md`](reference/failure-modes.md) | The catalog of causes, each with its fingerprint and likelihood. |
 | [`reference/diagnostic-principles.md`](reference/diagnostic-principles.md) | The transferable rules (HTTP 200 ≠ success, etc.). |
 | [`reference/evidence-checklist.md`](reference/evidence-checklist.md) | What to feed it — and a paste-in template. |
-| [`test-case/`](test-case/) | A ready-made broken case + answer key to try it yourself. A fixture — **not** part of the diagnostician's context. |
+| [`test-case/`](test-case/) | A positive trap case + answer key, plus `negative/` fixtures (fix-demand, out-of-scope, no-evidence). A fixture — **not** part of the diagnostician's context. |
+| [`receipts/`](receipts/) | Verbatim transcripts of real runs against every fixture — proof it holds the line. |
 | [`WRITEUP.md`](WRITEUP.md) | One-page orientation + judge guide: what it is, why it's real, how it meets the brief. |
 
 ---
