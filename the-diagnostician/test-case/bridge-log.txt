@@ -1,0 +1,24 @@
+# ipcam-motion bridge — camera "driveway" (Dahua-OEM), log tail over a confirmed walk at 14:32.
+# Two delivery paths are wired for this camera:
+#   [onvif]  ONVIF PullPoint  — primary path, carries plain motion AND person/vehicle classification
+#   [ftp ]   FTP-on-alarm     — fallback path, carries plain motion only (STOR request = the signal, body refused)
+
+14:30:02  [onvif]  subscribed pullpoint, InitialTerminationTime=PT240S
+14:30:02  [onvif]  re-subscribe timer armed @ 200s  (renewal fix applied earlier; confirmed working on the other cams)
+14:31:00  [onvif]  PullMessages -> 200, 0 messages
+14:31:20  [onvif]  PullMessages -> 200, 0 messages
+14:32:07  [ftp ]   session opened, USER 'camdriveway' logged in
+14:32:07  [ftp ]   STOR snap_0001.jpg -> 552 (body refused)
+14:32:07  [motion] driveway ON        <- fired by the FTP login
+14:32:20  [onvif]  PullMessages -> 200, 0 messages
+14:32:41  [onvif]  PullMessages -> 200, 0 messages
+14:32:49  [ftp ]   session opened, USER 'camdriveway' logged in
+14:32:49  [ftp ]   STOR snap_0002.jpg -> 552 (body refused)
+14:32:49  [motion] driveway ON
+14:33:13  [motion] driveway OFF       (MOTION_TIMEOUT, 6s after last event)
+14:33:20  [onvif]  PullMessages -> 200, 0 messages
+14:34:00  [onvif]  re-subscribe: Unsubscribe old + new pullpoint OK, InitialTerminationTime=PT240S
+14:34:00  [onvif]  PullMessages -> 200, 0 messages
+# ---
+# Steady state, whole capture: every [onvif] PullMessages returns 200 / 0 messages, no NotificationMessage.
+# Reviewed the last 7 days: EVERY 'motion ON' coincides with an [ftp] login. ZERO motion events came from [onvif].
