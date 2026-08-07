@@ -71,6 +71,13 @@ a parser bug but isn't. Feed **those two files** to the diagnostician, then chec
 And [`receipts/`](receipts/) holds **verbatim transcripts** of the diagnostician actually run against all
 four fixtures, so you can see it hold the line before you trust it.
 
+To confirm the folder itself is intact — all files present, the output contract defined, every receipt
+well-formed, no prescription leaked into a diagnosis — run the structural self-test (no dependencies):
+
+```
+python3 checks/verify.py --selftest
+```
+
 ## What it will NOT do
 
 - It won't fix the problem, edit your config, or write code.
@@ -91,6 +98,7 @@ four fixtures, so you can see it hold the line before you trust it.
 | [`reference/evidence-checklist.md`](reference/evidence-checklist.md) | What to feed it — and a paste-in template. |
 | [`test-case/`](test-case/) | A positive trap case + answer key, plus `negative/` fixtures (fix-demand, out-of-scope, no-evidence). A fixture — **not** part of the diagnostician's context. |
 | [`receipts/`](receipts/) | Verbatim transcripts of real runs against every fixture — proof it holds the line. |
+| [`checks/verify.py`](checks/verify.py) | A dependency-free structural self-test (`python3 checks/verify.py --selftest`). |
 | [`WRITEUP.md`](WRITEUP.md) | One-page orientation + judge guide: what it is, why it's real, how it meets the brief. |
 
 ---
